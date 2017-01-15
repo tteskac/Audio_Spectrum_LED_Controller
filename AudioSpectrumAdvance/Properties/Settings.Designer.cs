@@ -25,7 +25,7 @@ namespace AudioSpectrumAdvance.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int ch_from {
             get {
                 return ((int)(this["ch_from"]));
@@ -37,7 +37,7 @@ namespace AudioSpectrumAdvance.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("63")]
+        [global::System.Configuration.DefaultSettingValueAttribute("12")]
         public int ch_to {
             get {
                 return ((int)(this["ch_to"]));
@@ -85,7 +85,7 @@ namespace AudioSpectrumAdvance.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int average_count {
             get {
                 return ((int)(this["average_count"]));
