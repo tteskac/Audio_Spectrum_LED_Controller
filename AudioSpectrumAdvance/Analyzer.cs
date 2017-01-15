@@ -16,55 +16,59 @@ namespace AudioSpectrumAdvance
         private bool _enable;               //enabled status
         private DispatcherTimer _t;         //timer that refreshes the display
         public float[] _fft;               //buffer for fft data
-        private ProgressBar _l, _r;         //progressbars for left and right channel intensity
+        //private ProgressBar _l, _r;         //progressbars for left and right channel intensity
         private WASAPIPROC _process;        //callback function to obtain data
-        private int _lastlevel;             //last output level
-        private int _hanctr;                //last output level counter
+        //private int _lastlevel;             //last output level
+        //private int _hanctr;                //last output level counter
         public List<byte> _spectrumdata;   //spectrum data buffer
-        private Spectrum _spectrum;         //spectrum dispay control
+        public Spectrum _spectrum;         //spectrum dispay control
         private ComboBox _devicelist;       //device list
         private bool _initialized;          //initialized flag
         private int devindex;               //used device index
-        private Chart _chart;
+        public Chart _chart;
+        private TrackBar _trackbarFrom, _trackbarTo;
 
         private int _lines = 64;            // number of spectrum lines
 
         //ctor
-        public Analyzer(ProgressBar left, ProgressBar right, Spectrum spectrum, ComboBox devicelist , Chart chart)
+        public Analyzer(Spectrum spectrum, ComboBox devicelist, TrackBar trackbarFrom, TrackBar trackbarTo)
         {
             _fft = new float[8192];
-            _lastlevel = 0;
-            _hanctr = 0;
+            //_lastlevel = 0;
+            //_hanctr = 0;
             _t = new DispatcherTimer();
             _t.Tick += _t_Tick;
             _t.Interval = TimeSpan.FromMilliseconds(25); //40hz refresh rate//25
             _t.IsEnabled = false;
-            _l = left;
-            _r = right;
-            _l.Minimum = 0;
-            _r.Minimum = 0;
-            _r.Maximum = (ushort.MaxValue);
-            _l.Maximum = (ushort.MaxValue);
+            //_l = left;
+            //_r = right;
+            //_l.Minimum = 0;
+            //_r.Minimum = 0;
+            //_r.Maximum = (ushort.MaxValue);
+            //_l.Maximum = (ushort.MaxValue);
             _process = new WASAPIPROC(Process);
             _spectrumdata = new List<byte>();
             _spectrum = spectrum;
-            _chart = chart;
+            _chart = new Chart(); //chart;
             _devicelist = devicelist;
             _initialized = false;
+            _trackbarFrom = trackbarFrom;
+            _trackbarTo = trackbarTo;
 
-            chart.Series.Add("wave");
-            chart.Series["wave"].ChartType = SeriesChartType.FastLine;
-            chart.Series["wave"].ChartArea = "ChartArea1";
+            _chart.Series.Add("wave");
+            _chart.ChartAreas.Add("ChartArea1");
+            _chart.Series["wave"].ChartType = SeriesChartType.FastLine;
+            _chart.Series["wave"].ChartArea = "ChartArea1";
 
-            chart.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-            chart.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-            chart.ChartAreas["ChartArea1"].AxisY.Maximum = 255;
-            chart.ChartAreas["ChartArea1"].AxisY.Minimum = 0;
-            chart.ChartAreas["ChartArea1"].AxisX.Maximum = 64;
-            chart.ChartAreas["ChartArea1"].AxisX.Minimum = 0;
-            for (int i = 0; i < chart.ChartAreas["ChartArea1"].AxisX.Maximum; i++)
+            _chart.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+            _chart.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+            _chart.ChartAreas["ChartArea1"].AxisY.Maximum = 255;
+            _chart.ChartAreas["ChartArea1"].AxisY.Minimum = 0;
+            _chart.ChartAreas["ChartArea1"].AxisX.Maximum = 64;
+            _chart.ChartAreas["ChartArea1"].AxisX.Minimum = 0;
+            for (int i = 0; i < _chart.ChartAreas["ChartArea1"].AxisX.Maximum; i++)
             {
-                chart.Series["wave"].Points.Add(0);
+                _chart.Series["wave"].Points.Add(0);
             }
 
             Init();
@@ -175,25 +179,36 @@ namespace AudioSpectrumAdvance
             _spectrumdata.Clear();
 
 
-            int level = BassWasapi.BASS_WASAPI_GetLevel();
-            _l.Value = (Utils.LowWord32(level));
-            _r.Value = (Utils.HighWord32(level));
-            if (level == _lastlevel && level != 0) _hanctr++;
-            _lastlevel = level;
+            //int level = BassWasapi.BASS_WASAPI_GetLevel();
+            //_l.Value = (Utils.LowWord32(level));
+            //_r.Value = (Utils.HighWord32(level));
+            //if (level == _lastlevel && level != 0) _hanctr++;
+            //_lastlevel = level;
 
-            //Required, because some programs hang the output. If the output hangs for a 75ms
-            //this piece of code re initializes the output so it doesn't make a gliched sound for long.
-            if (_hanctr > 3)
+            ////Required, because some programs hang the output. If the output hangs for a 75ms
+            ////this piece of code re initializes the output so it doesn't make a gliched sound for long.
+            //if (_hanctr > 3)
+            //{
+            //    _hanctr = 0;
+            //    _l.Value = (0);
+            //    _r.Value = (0);
+            //    Free();
+            //    Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero);
+            //    _initialized = false;
+            //    Enable = true;
+            //}
+
+        }
+
+        public int getAverageValue()
+        {
+            int sum = 0;
+            for(int i = _trackbarFrom.Value; i <= _trackbarTo.Value; i++)
             {
-                _hanctr = 0;
-                _l.Value = (0);
-                _r.Value = (0);
-                Free();
-                Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero);
-                _initialized = false;
-                Enable = true;
+                sum += (int) _chart.Series["wave"].Points[i].YValues[0];
             }
-
+            
+            return (int) sum / (_trackbarTo.Value - _trackbarFrom.Value + 1);
         }
 
         // WASAPI callback, required for continuous recording
