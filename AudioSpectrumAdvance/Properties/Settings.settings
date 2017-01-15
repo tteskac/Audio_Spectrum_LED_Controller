@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="ch_from" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="ch_to" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">63</Value>
+      <Value Profile="(Default)">12</Value>
     </Setting>
     <Setting Name="timer_interval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">25</Value>
@@ -18,7 +18,7 @@
       <Value Profile="(Default)">8888</Value>
     </Setting>
     <Setting Name="average_count" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">5</Value>
     </Setting>
   </Settings>
 </SettingsFile>
