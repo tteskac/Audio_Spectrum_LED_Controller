@@ -94,5 +94,29 @@ namespace AudioSpectrumAdvance.Properties {
                 this["average_count"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int min_value {
+            get {
+                return ((int)(this["min_value"]));
+            }
+            set {
+                this["min_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255")]
+        public int max_value {
+            get {
+                return ((int)(this["max_value"]));
+            }
+            set {
+                this["max_value"] = value;
+            }
+        }
     }
 }

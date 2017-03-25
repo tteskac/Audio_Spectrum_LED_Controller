@@ -20,5 +20,11 @@
     <Setting Name="average_count" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
+    <Setting Name="min_value" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="max_value" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">255</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
