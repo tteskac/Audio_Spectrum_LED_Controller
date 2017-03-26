@@ -13,6 +13,7 @@ using System.Net.Sockets;
 using System.Resources;
 using System.IO;
 using System.Reflection;
+using Microsoft.Win32;
 
 namespace AudioSpectrumAdvance
 {
@@ -106,6 +107,8 @@ namespace AudioSpectrumAdvance
         {
             timer1.Interval = Properties.Settings.Default.timer_interval;
 
+            checkBox_start_with_windows.Checked = Properties.Settings.Default.start_with_windows;
+
             trackBar_low_ch.Value = Properties.Settings.Default.ch_from;
             trackBar_high_ch.Value = Properties.Settings.Default.ch_to;
             textBox_ip.Text = Properties.Settings.Default.ip_address;
@@ -122,6 +125,8 @@ namespace AudioSpectrumAdvance
 
         private void button_save_Click(object sender, EventArgs e)
         {
+            RegisterInStartup(checkBox_start_with_windows.Checked);
+
             Properties.Settings.Default.ch_from = trackBar_low_ch.Value;
             Properties.Settings.Default.ch_to = trackBar_high_ch.Value;
             Properties.Settings.Default.ip_address = textBox_ip.Text;
@@ -129,7 +134,7 @@ namespace AudioSpectrumAdvance
             Properties.Settings.Default.average_count = trackBar_aggression.Value;
             Properties.Settings.Default.min_value = trackBar_minVal.Value;
             Properties.Settings.Default.max_value = trackBar_maxVal.Value;
-
+            
             Properties.Settings.Default.Save();
         }
 
@@ -183,6 +188,22 @@ namespace AudioSpectrumAdvance
             {
                 trackBar_minVal.Value = trackBar_maxVal.Value;
             }
+        }
+
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+                showBaloon("I'm now in the system tray");
+            }
+        }
+
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            notifyIcon.Visible = false;
         }
 
 
@@ -285,6 +306,7 @@ namespace AudioSpectrumAdvance
 
         void exitMenu_Click(object sender, EventArgs e)
         {
+            notifyIcon.Visible = false;
             this.Close();
         }
         
@@ -295,12 +317,38 @@ namespace AudioSpectrumAdvance
 
         #endregion ICON TRAY
 
-        private void Form1_Resize(object sender, EventArgs e)
+
+        private void RegisterInStartup(bool isChecked)
         {
-            if (this.WindowState == FormWindowState.Minimized)
+            try
             {
-                this.Hide();
-                showBaloon("I'm now in system tray");
+                RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
+                        ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                if (isChecked)
+                {
+                    registryKey.SetValue("LedAmbientLight", Application.ExecutablePath);
+                }
+                else
+                {
+                    try { registryKey.DeleteValue("LedAmbientLight"); } catch (Exception) { }
+                }
+
+                Properties.Settings.Default.start_with_windows = checkBox_start_with_windows.Checked;
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception e)
+            {
+                // an error! 
+                MessageBox.Show(e.Message, "Start with Windows Error!");
+            }
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            if (checkBox_start_with_windows.Checked)
+            {
+                checkBox_enabled.Checked = true;
+                this.WindowState = FormWindowState.Minimized;
             }
         }
     }

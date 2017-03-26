@@ -55,6 +55,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.spectrum1 = new AudioSpectrumAdvance.Spectrum();
+            this.checkBox_start_with_windows = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_low_ch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_high_ch)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -173,7 +174,7 @@
             // 
             this.button_save.Location = new System.Drawing.Point(727, 263);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(195, 72);
+            this.button_save.Size = new System.Drawing.Size(195, 46);
             this.button_save.TabIndex = 16;
             this.button_save.Text = "Save settings";
             this.button_save.UseVisualStyleBackColor = true;
@@ -303,11 +304,22 @@
             this.elementHost1.TabIndex = 0;
             this.elementHost1.Child = this.spectrum1;
             // 
+            // checkBox_start_with_windows
+            // 
+            this.checkBox_start_with_windows.AutoSize = true;
+            this.checkBox_start_with_windows.Location = new System.Drawing.Point(459, 292);
+            this.checkBox_start_with_windows.Name = "checkBox_start_with_windows";
+            this.checkBox_start_with_windows.Size = new System.Drawing.Size(173, 17);
+            this.checkBox_start_with_windows.TabIndex = 19;
+            this.checkBox_start_with_windows.Text = "Start with Windows / minimized";
+            this.checkBox_start_with_windows.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1309, 427);
+            this.Controls.Add(this.checkBox_start_with_windows);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.groupBox1);
@@ -320,7 +332,9 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "LED Ambient light controller";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_low_ch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_high_ch)).EndInit();
@@ -364,6 +378,7 @@
         private System.Windows.Forms.Label label_minVal;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TrackBar trackBar_minVal;
+        private System.Windows.Forms.CheckBox checkBox_start_with_windows;
     }
 }
 
