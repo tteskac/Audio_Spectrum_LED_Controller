@@ -12,13 +12,22 @@
       <Value Profile="(Default)">25</Value>
     </Setting>
     <Setting Name="ip_address" Type="System.String" Scope="User">
-      <Value Profile="(Default)">192.168.137.165</Value>
+      <Value Profile="(Default)">192.168.137.10</Value>
     </Setting>
     <Setting Name="ip_port" Type="System.String" Scope="User">
       <Value Profile="(Default)">8888</Value>
     </Setting>
     <Setting Name="average_count" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="min_value" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="max_value" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">255</Value>
+    </Setting>
+    <Setting Name="start_with_windows" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

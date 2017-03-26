@@ -61,7 +61,7 @@ namespace AudioSpectrumAdvance.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.137.165")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.137.10")]
         public string ip_address {
             get {
                 return ((string)(this["ip_address"]));
@@ -92,6 +92,42 @@ namespace AudioSpectrumAdvance.Properties {
             }
             set {
                 this["average_count"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int min_value {
+            get {
+                return ((int)(this["min_value"]));
+            }
+            set {
+                this["min_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255")]
+        public int max_value {
+            get {
+                return ((int)(this["max_value"]));
+            }
+            set {
+                this["max_value"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool start_with_windows {
+            get {
+                return ((bool)(this["start_with_windows"]));
+            }
+            set {
+                this["start_with_windows"] = value;
             }
         }
     }
