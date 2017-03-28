@@ -175,19 +175,19 @@ namespace AudioSpectrumAdvance
         private void track_minVal_ValueChanged(object sender, EventArgs e)
         {
             label_minVal.Text = trackBar_minVal.Value.ToString();
-            if (trackBar_minVal.Value > trackBar_maxVal.Value)
-            {
-                trackBar_maxVal.Value = trackBar_minVal.Value;
-            }
+            //if (trackBar_minVal.Value > trackBar_maxVal.Value)
+            //{
+            //    trackBar_maxVal.Value = trackBar_minVal.Value;
+            //}
         }
 
         private void track_maxVal_ValueChanged(object sender, EventArgs e)
         {
             label_maxVal.Text = trackBar_maxVal.Value.ToString();
-            if (trackBar_maxVal.Value < trackBar_minVal.Value)
-            {
-                trackBar_minVal.Value = trackBar_maxVal.Value;
-            }
+            //if (trackBar_maxVal.Value < trackBar_minVal.Value)
+            //{
+            //    trackBar_minVal.Value = trackBar_maxVal.Value;
+            //}
         }
 
 
