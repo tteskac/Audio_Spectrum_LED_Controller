@@ -53,9 +53,10 @@
             this.trackBar_minVal = new System.Windows.Forms.TrackBar();
             this.groupBox_led_brightness = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.checkBox_start_with_windows = new System.Windows.Forms.CheckBox();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.spectrum1 = new AudioSpectrumAdvance.Spectrum();
-            this.checkBox_start_with_windows = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_low_ch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_high_ch)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -296,14 +297,6 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Aggression (how fast/smooth light respond to sound):";
             // 
-            // elementHost1
-            // 
-            this.elementHost1.Location = new System.Drawing.Point(12, 63);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(1288, 125);
-            this.elementHost1.TabIndex = 0;
-            this.elementHost1.Child = this.spectrum1;
-            // 
             // checkBox_start_with_windows
             // 
             this.checkBox_start_with_windows.AutoSize = true;
@@ -313,6 +306,19 @@
             this.checkBox_start_with_windows.TabIndex = 19;
             this.checkBox_start_with_windows.Text = "Start with Windows / minimized";
             this.checkBox_start_with_windows.UseVisualStyleBackColor = true;
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 50;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // elementHost1
+            // 
+            this.elementHost1.Location = new System.Drawing.Point(12, 63);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(1288, 125);
+            this.elementHost1.TabIndex = 0;
+            this.elementHost1.Child = this.spectrum1;
             // 
             // Form1
             // 
@@ -379,6 +385,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TrackBar trackBar_minVal;
         private System.Windows.Forms.CheckBox checkBox_start_with_windows;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 
