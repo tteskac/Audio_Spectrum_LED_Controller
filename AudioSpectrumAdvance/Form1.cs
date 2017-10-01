@@ -79,16 +79,28 @@ namespace AudioSpectrumAdvance
             catch (Exception) { }
         }
 
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                byte[] send_buffer = Encoding.ASCII.GetBytes(":");
+                sending_socket.SendTo(send_buffer, sending_end_point);
+            }
+            catch (Exception) { }
+        }
+
         private void checkBox_enabled_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox_enabled.Checked)
             {
                 connect();
                 timer1.Enabled = true;
+                timer2.Enabled = true;
             }
             else
             {
                 timer1.Enabled = false;
+                timer2.Enabled = false;
                 _cmd = ":C= " + trackBar_minVal.Value + ";";
                 byte[] send_buffer = Encoding.ASCII.GetBytes(_cmd);
                 sending_socket.SendTo(send_buffer, sending_end_point);
@@ -351,5 +363,6 @@ namespace AudioSpectrumAdvance
                 this.WindowState = FormWindowState.Minimized;
             }
         }
+        
     }
 }
