@@ -58,12 +58,6 @@ namespace AudioSpectrumAdvance
             enableAnalyzer();
         }
 
-        private void button_stop_Click(object sender, EventArgs e)
-        {
-            analyzer.DisplayEnable = false;
-            analyzer.Enable = false;
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             ShowBalloonTip();
