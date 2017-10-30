@@ -44,9 +44,18 @@ namespace AudioSpectrumAdvance
             getSettings();
 
             analyzer = new Analyzer(spectrum1, comboBox_soundcard_list, trackBar_low_ch, trackBar_high_ch);
+        }
+
+        private void enableAnalyzer()
+        {
+            button_start.Enabled = false;
             analyzer.Enable = true;
             analyzer.DisplayEnable = true;
-            
+        }
+
+        private void button_start_Click(object sender, EventArgs e)
+        {
+            enableAnalyzer();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -359,10 +368,10 @@ namespace AudioSpectrumAdvance
         {
             if (checkBox_start_with_windows.Checked)
             {
+                enableAnalyzer();
                 checkBox_enabled.Checked = true;
                 this.WindowState = FormWindowState.Minimized;
             }
         }
-        
     }
 }
