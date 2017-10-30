@@ -57,6 +57,7 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.spectrum1 = new AudioSpectrumAdvance.Spectrum();
+            this.button_start = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_low_ch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_high_ch)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -300,7 +301,7 @@
             // checkBox_start_with_windows
             // 
             this.checkBox_start_with_windows.AutoSize = true;
-            this.checkBox_start_with_windows.Location = new System.Drawing.Point(459, 292);
+            this.checkBox_start_with_windows.Location = new System.Drawing.Point(727, 315);
             this.checkBox_start_with_windows.Name = "checkBox_start_with_windows";
             this.checkBox_start_with_windows.Size = new System.Drawing.Size(173, 17);
             this.checkBox_start_with_windows.TabIndex = 19;
@@ -320,11 +321,22 @@
             this.elementHost1.TabIndex = 0;
             this.elementHost1.Child = this.spectrum1;
             // 
+            // button_start
+            // 
+            this.button_start.Location = new System.Drawing.Point(459, 290);
+            this.button_start.Name = "button_start";
+            this.button_start.Size = new System.Drawing.Size(262, 42);
+            this.button_start.TabIndex = 20;
+            this.button_start.Text = "Start";
+            this.button_start.UseVisualStyleBackColor = true;
+            this.button_start.Click += new System.EventHandler(this.button_start_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1309, 427);
+            this.Controls.Add(this.button_start);
             this.Controls.Add(this.checkBox_start_with_windows);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button_save);
@@ -386,6 +398,7 @@
         private System.Windows.Forms.TrackBar trackBar_minVal;
         private System.Windows.Forms.CheckBox checkBox_start_with_windows;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Button button_start;
     }
 }
 
